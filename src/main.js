@@ -25,13 +25,21 @@
     function drowTarget(originX, originY) {
       canvasElement.width = window.innerWidth;
       canvasElement.height = window.innerHeight;
-      context.beginPath();
       for (let i = 10; i >= 0; i--) {
         const radius = i * stepTarget;
+        context.beginPath();
         context.arc(originX, originY, radius, 0, 2 * Math.PI);
+        if (i % 2 === 0) {
+          context.fillStyle = '#006400';
+          context.fill();
+        } else {
+          context.fillStyle = '#F0FFFF';
+          context.fill();
+        }
+        context.stroke();
+        context.closePath();
       }
-      context.stroke();
-      context.closePath();
+
     }
     drowTarget(randomX, randomY);
 
@@ -52,8 +60,8 @@
     scoreElement.innerText = `Счет игры: ${finalScore}`;
   });
 
-  const timerId = setInterval(processTarget, timeoutTarget);
-  setTimeout(() => { clearInterval(timerId); }, (gameTime * timeoutTarget - 1));
+  // const timerId = setInterval(processTarget, timeoutTarget);
+  // setTimeout(() => { clearInterval(timerId); }, (gameTime * timeoutTarget - 1));
 
   document.addEventListener('DOMContentLoaded', processTarget);
   window.addEventListener('resize', processTarget);
