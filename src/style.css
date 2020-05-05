@@ -21,3 +21,18 @@ html, body {
   right: 0;
   margin: 10px;
 }
+
+#gameoverElement {
+  position: absolute;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid orange;
+  top: 50%;
+
+}
+
+#canvas {
+  position: absolute;
+}
+

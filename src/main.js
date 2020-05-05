@@ -5,13 +5,17 @@
   const countElement = document.getElementById('count');
   const scoreElement = document.getElementById('score');
   const canvasElement = document.getElementById('canvas');
+  const gameoverElement = document.getElementById('gameover');
   const context = canvasElement.getContext('2d');
   const stepTarget = 10;
-  const gameTime = 7;
+  const gameTime = 3;
   const timeoutTarget = 1000;
   const mouseClickLog = [];
   let finalScore = 0;
   let bcs2ucs;
+
+  gameoverElement.width = window.innerWidth;
+  gameoverElement.height = window.innerHeight;
 
   function processTarget() {
     function randomInteger(min, max) {
@@ -25,6 +29,7 @@
     function drowTarget(originX, originY) {
       canvasElement.width = window.innerWidth;
       canvasElement.height = window.innerHeight;
+
       for (let i = 10; i >= 0; i--) {
         const radius = i * stepTarget;
         context.beginPath();
@@ -38,6 +43,7 @@
         }
         context.stroke();
         context.closePath();
+
       }
 
     }
@@ -60,8 +66,14 @@
     scoreElement.innerText = `Счет игры: ${finalScore}`;
   });
 
-  // const timerId = setInterval(processTarget, timeoutTarget);
-  // setTimeout(() => { clearInterval(timerId); }, (gameTime * timeoutTarget - 1));
+  const timerId = setInterval(processTarget, timeoutTarget);
+  setTimeout(() => { clearInterval(timerId); }, (gameTime * timeoutTarget - 1));
+
+  setTimeout(() => {
+    context.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    gameoverElement.innerText = window.gameOver(finalScore, stepTarget);
+  }, gameTime * timeoutTarget);
+
 
   document.addEventListener('DOMContentLoaded', processTarget);
   window.addEventListener('resize', processTarget);
