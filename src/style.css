@@ -1,0 +1,23 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#mouseClickCoordinates {
+  position: absolute;
+  right: 0;
+  margin: 10px;
+}
+
+#count {
+  position: absolute;
+  border: 1px solid orange;
+  margin: 10px;
+}
+
+#score {
+  position: absolute;
+  right: 0;
+  margin: 10px;
+}
