@@ -1,21 +1,35 @@
 'use strict';
 
 (function main() {
-  const mouseClickCoordinatesElement = document.getElementById('mouseClickCoordinates');
+  const buttonElement = document.getElementById('button');
+  const countdownElement = document.getElementById('countdown');
   const countElement = document.getElementById('count');
   const scoreElement = document.getElementById('score');
   const canvasElement = document.getElementById('canvas');
   const gameoverElement = document.getElementById('gameover');
   const context = canvasElement.getContext('2d');
   const stepTarget = 10;
-  const gameTime = 3;
+  const gameTime = 10;
   const timeoutTarget = 1000;
   const mouseClickLog = [];
   let finalScore = 0;
   let bcs2ucs;
 
-  gameoverElement.width = window.innerWidth;
-  gameoverElement.height = window.innerHeight;
+
+  function countdownTimer() {
+    let current = gameTime;
+
+    const timerId = setInterval(() => {
+      if (current === 0) {
+        clearInterval(timerId);
+      }
+      if (current <= 9) {
+        current = `0${current}`;
+      }
+      countdownElement.innerText = current;
+      current--;
+    }, 1000);
+  }
 
   function processTarget() {
     function randomInteger(min, max) {
@@ -34,7 +48,7 @@
         const radius = i * stepTarget;
         context.beginPath();
         context.arc(originX, originY, radius, 0, 2 * Math.PI);
-        if (i % 2 === 0) {
+        if (i <= 5 && i > 2) {
           context.fillStyle = '#006400';
           context.fill();
         } else {
@@ -52,7 +66,26 @@
     bcs2ucs = (mouseX, mouseY) => window.mapCoordinates(mouseX, mouseY, randomX, randomY);
   }
 
-  document.addEventListener('click', (event) => {
+  function beginGame() {
+    countElement.style.display = 'none';
+    scoreElement.style.display = 'none';
+    canvasElement.style.display = 'none';
+    gameoverElement.style.display = 'none';
+  }
+
+  buttonElement.onclick = () => {
+    buttonElement.style.display = 'none';
+    countElement.style.display = 'block';
+    countElement.innerText = '';
+    scoreElement.style.display = 'block';
+    scoreElement.innerText = '';
+    canvasElement.style.display = 'block';
+    gameoverElement.style.display = 'block';
+    processTarget();
+    countdownTimer();
+  }
+
+  canvasElement.onclick = function canvasClick() {
     const [x, y] = bcs2ucs(event.clientX, event.clientY);
     const pointGame = window.quadrants(x, y, stepTarget);
     console.log(`pointGame: ${pointGame}`);
@@ -64,18 +97,38 @@
       countElement.innerHTML += `<li> Ваш выстрел: ${mouseClickLog[i]} </li>`;
     }
     scoreElement.innerText = `Счет игры: ${finalScore}`;
-  });
+  }
 
-  const timerId = setInterval(processTarget, timeoutTarget);
-  setTimeout(() => { clearInterval(timerId); }, (gameTime * timeoutTarget - 1));
+
 
   setTimeout(() => {
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    gameoverElement.innerText = window.gameOver(finalScore, stepTarget);
-  }, gameTime * timeoutTarget);
+    countElement.disabled = true;
+    scoreElement.disabled = true;
+    canvasElement.disabled = true;
+    const arrayLength = mouseClickLog.length;
+    gameoverElement.innerText = window.gameOver(finalScore, arrayLength);
+    canvasElement.onclick = 'none';
+    countdownElement.hidden = true;
+  }, gameTime * 1000);
 
 
-  document.addEventListener('DOMContentLoaded', processTarget);
+
+
+  // let index = gameTime;
+  // let countdownTimer = setInterval(setInterval(function() {
+  //   countdownElement.innerText = `${--index}`;
+  // }, 1000)
+  //
+  // setTimeout(() => { clearInterval(countdownTimer); }, (gameTime);
+
+
+
+
+
+
+
+  document.addEventListener('DOMContentLoaded', beginGame);
   window.addEventListener('resize', processTarget);
 
 }());
