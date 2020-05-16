@@ -3,7 +3,7 @@
 (function quadrants() {
   window.quadrants = (x, y, stepTarget) => {
     const radius = Math.sqrt(x * x + y * y);
-    const points0 = 0;
+    const points0 = -1;
     const points1 = 10;
     const points2 = 9;
     const points3 = 8;

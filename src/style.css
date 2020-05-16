@@ -4,56 +4,72 @@ html, body {
   margin: 0;
 }
 
-#mouseClickCoordinates {
-  position: absolute;
-  right: 0;
-  margin: 10px;
-}
-
 #count {
   position: absolute;
-  border: 1px solid orange;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: #FDBE33 #000 #D77206;
+  border-radius: 6px;
   margin: 10px;
+  z-index: 40;
+  font-size: 18px;
+  font-family: sans-serif;
+  color: #00008B;
 }
 
 #score {
   position: absolute;
   right: 0;
   margin: 10px;
+  z-index: 20;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: #FDBE33 #000 #D77206;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 18px;
+  font-family: sans-serif;
+  color: #00008B;
 }
 
 #canvas {
   position: absolute;
+  z-index: 30;
 }
 
 #gameover {
   position	: absolute;
-  top		: 0;
-  bottom	: 0;
+  top		: 35%;
   left		: 0;
   right		: 0;
   margin	: auto;
   height	: 100px;
   width		: 70%;
   text-align: center;
+  font-size: 40px;
+  z-index: 10;
+  color: darkred;
+
 }
 
-#countdown{
+#countdown {
   position	: absolute;
   text-align: center;
+  font-size: 25px;
+  color: #00008B;
   left		: 0;
   right		: 0;
 }
 
-#button{
+#button {
   position	: absolute;
   top		: 0;
   bottom	: 0;
   left		: 0;
   right		: 0;
   margin	: auto;
-  height	: 100px;
-  width		: 70%;
+  height	: 50px;
+  width		: 30%;
   display: block;
 }
 
@@ -74,4 +90,31 @@ html, body {
 .button24:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; }
 .button24:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
 
+#button2 {
+  position	: absolute;
+  top		: 60%;
+  left		: 0;
+  right		: 0;
+  margin	: auto;
+  height	: 50px;
+  width		: 30%;
+  display: block;
+  z-index: 60;
+}
+.button2 {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: .5em 2em;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: #FDBE33 #000 #D77206;
+  border-radius: 6px;
+  background: linear-gradient(#F3AE0F, #E38916) #E38916;
+  transition: 0.2s;
+
+}
+.button2:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; }
+.button2:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
 
