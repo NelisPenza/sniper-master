@@ -10,7 +10,7 @@
   const gameoverElement = document.getElementById('gameover');
   const context = canvasElement.getContext('2d');
   const stepTarget = 10;
-  const timerGame = 10;
+  const timerGame = 20;
   const mouseClickLog = [];
   let finalScore;
   let bcs2ucs;
